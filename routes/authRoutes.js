@@ -8,6 +8,9 @@ const oauth2Client = new google.auth.OAuth2(
   "http://localhost:3000/oauth2callback" // redirect_uri
 );
 
+
+
+
 // 1️⃣ Ruta para redirigir al login de Google
 router.get("/auth", (req, res) => {
   const scopes = ["https://www.googleapis.com/auth/youtube.upload"];
