@@ -3,6 +3,7 @@ const cors = require("cors");
 const sequelize = require("./config/db");
 const SocialAccountRoutes = require("./routes/SocialAccountRoutes");
 const authRoutes = require("./routes/authRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 const authMiddleware = require("./middleware/authMiddleware");
 const UserController = require("./controllers/UserController");
 const User = require("./models/User");
@@ -51,6 +52,7 @@ app.use(
 
 app.post("/login", UserController.login);
 app.use("/socialAccounts", authMiddleware, SocialAccountRoutes);
+app.use("/admin", authMiddleware, adminRoutes);
 app.use("/", authMiddleware, authRoutes);
 
 sequelize
