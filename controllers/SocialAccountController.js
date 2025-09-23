@@ -8,10 +8,8 @@ exports.getSocialAccount = async (req, res) => {
 exports.createSocialAccount = async (req,res) =>{
     try {
         const {platform,clientId,clientSecret,accessToken,refreshToken,expiresAt,pageId,channelId,extraData} = req.body;
-
         const socialAccount = await SocialAccount.create({platform,clientId,clientSecret,accessToken,refreshToken,expiresAt,pageId,channelId,extraData});
         res.status(201).json(socialAccount);
-        
     } catch (error) {
         res.status(500).json(error);
     }

@@ -3,7 +3,7 @@ const { google } = require("googleapis");
 const router = express.Router();
 
 const oauth2Client = new google.auth.OAuth2(
-  "m", // client_id
+  "7", // client_id
   "G", // client_secret
   "http://localhost:3000/oauth2callback" // redirect_uri
 );
