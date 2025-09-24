@@ -1,10 +1,33 @@
 const fs = require("fs");
 const { google } = require("googleapis");
+const SocialAccount = require("../models/SocialAccount");
 
-const CLIENT_ID = "7";
-const CLIENT_SECRET = "";
-const REDIRECT_URI = "http://localhost:3000/oauth2callback"; // debe ser igual al que usaste
-const REFRESH_TOKEN = ""; // el que obtuviste
+let CLIENT_ID = "";
+let CLIENT_SECRET = "";
+const REDIRECT_URI = "http://192.168.0.111:3000/oauth2callback"; // debe ser igual al que usaste
+let REFRESH_TOKEN = ""; // el que obtuviste
+
+// Función para cargar credenciales desde la BD
+const loadCredentials = async () => {
+  try {
+    const account = await SocialAccount.findOne({ platform: "youtube" });
+    if (!account) {
+      throw new Error("❌ No se encontró la cuenta de YouTube en la BD");
+    }
+    if (!account.clientId || !account.clientSecret || !account.refreshToken) {
+      throw new Error("❌ Credenciales incompletas en la BD");
+    }
+    CLIENT_ID = account.clientId;
+    CLIENT_SECRET = account.clientSecret;
+    REFRESH_TOKEN = account.refreshToken;
+  } catch (error) {
+    console.error("Error cargando credenciales:", error);
+    throw error;
+  }
+};
+
+// Cargar credenciales al iniciar el módulo
+loadCredentials();
 
 // Configurar OAuth2 Client
 const oauth2Client = new google.auth.OAuth2(

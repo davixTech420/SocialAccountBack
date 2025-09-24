@@ -50,12 +50,10 @@ router.post("/upload-video", upload.single("video"), async (req, res) => {
       "Título de prueba desde NodeJS",
       "Descripción de prueba para el video subido con la API de YouTube"
     );
-
     res.json({
       message: "Video subido exitosamente al servidor y a youtube",
       path: videoPath,
       yotube: youtubeResponse,
-
     });
   } catch (error) {
     res.status(500).json({ error: "Error al subir el video" });

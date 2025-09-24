@@ -26,6 +26,7 @@ app.use(
         "http://localhost:3000",
         "http://localhost:8081",
         "exp://127.0.0.1:8081",
+        "exp://192.168.0.115",
       ];
 
       if (allowedOrigins.indexOf(origin) !== -1) {
@@ -53,7 +54,7 @@ app.use(
 app.post("/login", UserController.login);
 app.use("/socialAccounts", authMiddleware, SocialAccountRoutes);
 app.use("/admin", authMiddleware, adminRoutes);
-app.use("/", authMiddleware, authRoutes);
+app.use("/", authRoutes);
 
 sequelize
   .sync({ force: false, alter: false })
