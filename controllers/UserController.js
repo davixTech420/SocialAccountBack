@@ -74,6 +74,6 @@ exports.login = async (req, res) => {
     );
     return res.json({ token });
   } catch (error) {
-    return res.status(500).json({ message: "Error en el login" });
+    return res.status(500).json({ message: "Error en el login",error });
   }
 };

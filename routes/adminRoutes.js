@@ -42,6 +42,7 @@ const upload = multer({ storage });
 router.post("/upload-video", upload.single("video"), async (req, res) => {
   try {
     const videoPath = req.file.path;
+    
 
     // Aquí puedes conectar con YouTube, Facebook, etc.
     // Ejemplo: llamar a la función uploadToYoutube(videoPath)

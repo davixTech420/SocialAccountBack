@@ -26,7 +26,7 @@ app.use(
         "http://localhost:3000",
         "http://localhost:8081",
         "exp://127.0.0.1:8081",
-        "exp://192.168.0.115",
+        "exp://192.168.0.110",
       ];
 
       if (allowedOrigins.indexOf(origin) !== -1) {

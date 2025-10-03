@@ -4,7 +4,7 @@ const SocialAccount = require("../models/SocialAccount");
 
 let CLIENT_ID = "";
 let CLIENT_SECRET = "";
-const REDIRECT_URI = "http://192.168.0.111:3000/oauth2callback"; // debe ser igual al que usaste
+const REDIRECT_URI = "http://localhost:3000/oauth2callback"; // debe ser igual al que usaste
 let REFRESH_TOKEN = ""; // el que obtuviste
 
 // Función para cargar credenciales desde la BD
