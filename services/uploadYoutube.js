@@ -60,7 +60,7 @@ async function uploadToYoutube(videoPath, title, description) {
           title: title,
           description: description,
           tags: ["nodejs", "api", "upload"],
-          categoryId: "22", // categoría: 22 = People & Blogs
+          categoryId: "22",
         },
         status: {
           privacyStatus: "private", // "public" | "private" | "unlisted"
@@ -73,9 +73,9 @@ async function uploadToYoutube(videoPath, title, description) {
 
     console.log("✅ Video subido con éxito:", res.data);
     return res.data;
-  } catch (err) {
-    console.error("❌ Error subiendo el video a YouTube:", err);
-    throw err;
+  } catch (error) {
+    console.error("❌ Error subiendo el video a YouTube:", error);
+    throw error;
   }
 }
 

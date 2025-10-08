@@ -56,8 +56,8 @@ router.post("/upload-video", upload.single("video"), async (req, res) => {
       path: videoPath,
       yotube: youtubeResponse,
     });
-  } catch (error) {
-    res.status(500).json({ error: "Error al subir el video" });
+  } catch (err) {
+    res.status(500).json({ error: err });
   }
 });
 
