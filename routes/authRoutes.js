@@ -90,22 +90,22 @@ router.get("/oauth2callback", async (req, res) => {
     });
 
     // Guardar tokens en la base de datos
-   let account = await SocialAccount.findOne({ platform: "youtube" });
+    let account = await SocialAccount.findOne({ platform: "youtube" });
 
-if (!account) {
-  account = new SocialAccount({
-    platform: "youtube",
-    accessToken: tokens.access_token,
-    refreshToken: tokens.refresh_token,
-    expiresAt: tokens.expiry_date,
-  });
-} else {
-  account.accessToken = tokens.access_token;
-  account.refreshToken = tokens.refresh_token;
-  account.expiresAt = tokens.expiry_date;
-}
+    if (!account) {
+      account = new SocialAccount({
+        platform: "youtube",
+        accessToken: tokens.access_token,
+        refreshToken: tokens.refresh_token,
+        expiresAt: tokens.expiry_date,
+      });
+    } else {
+      account.accessToken = tokens.access_token;
+      account.refreshToken = tokens.refresh_token;
+      account.expiresAt = tokens.expiry_date;
+    }
 
-await account.save();
+    await account.save();
 
     console.log("💾 Tokens guardados en la base de datos");
 
@@ -203,6 +203,17 @@ router.get("/test-auth", async (req, res) => {
       message: "Error conectando con YouTube API. Verifica la autenticación.",
     });
   }
+});
+
+//facebook
+
+router.get("/facebook/login", async (req, res) => {
+  const facebookAccount = await SocialAccount.findOne({ where: { platform: "facebook" } });
+  console.log("Facebook Account:", facebookAccount);
+
+  const redirectUri = `https://www.facebook.com/v19.0/dialog/oauth?client_id=${facebookAccount.clientId}&redirect_uri=http://localhost:3000/facebook/callback&scope=pages_show_list,pages_read_engagement,pages_manage_posts,pages_manage_videos,pages_read_user_content,pages_manage_metadata`;
+
+  res.redirect(redirectUri);
 });
 
 module.exports = router;
